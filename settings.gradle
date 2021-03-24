@@ -1,0 +1,3 @@
+include ':example_screen_control'
+include ':lib_system_bar'
+rootProject.name = "lib_system_bar"
