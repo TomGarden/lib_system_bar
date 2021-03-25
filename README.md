@@ -21,6 +21,49 @@ repositories {
 }
 ```
 
+### 占位符
+
+SystemBar 隐藏或者 SystemBar 覆盖 layout 的时候可能会需要一个和 SystemBar 尺寸相同的 View
+
+```xml
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--layout_height 字段的设定无意义 , onMeasure 逻辑已被改写-->
+        <io.github.tomgarden.lib_system_bar.view.PlaceHolderStatusBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+        <FrameLayout/>
+
+        <!--layout_height 字段的设定无意义 , onMeasure 逻辑已被改写-->
+        <io.github.tomgarden.lib_system_bar.view.PlaceHolderNavigationBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black" />
+        
+    </LinearLayout>
+```
+
+### 其他能力 , 代码里有注释
+
+`SystemBar.xXxxxXxxx()` 
+
+
+----
+
 ## 0x00. [控制系统界面可见度](https://developer.android.com/training/system-ui?hl=zh-cn)
 
 1. 控制状态栏模糊程度

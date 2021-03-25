@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Space">
+        <attr name="lib_system_bar_cover_layout_width_pix" format="integer" />
+        <attr name="lib_system_bar_cover_layout_height_pix" format="integer" />
+    </declare-styleable>
+
+</resources>

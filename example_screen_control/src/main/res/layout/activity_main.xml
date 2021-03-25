@@ -1,135 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+
+        <import type="io.github.tomgarden.lib_system_bar.SystemBar" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
+        android:orientation="vertical">
 
-        <ImageView
+        <io.github.tomgarden.lib_system_bar.view.PlaceHolderStatusBar
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/ic_launcher_background"
-            android:src="@drawable/ic_baseline_science_24" />
+            android:layout_height="wrap_content"
+            android:background="@color/black" />
 
-        <ImageView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/ic_launcher_background"
-            android:src="@drawable/ic_baseline_science_24" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/ic_launcher_background"
+                android:src="@drawable/ic_baseline_science_24" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ic_launcher_background"
+                android:src="@drawable/ic_baseline_science_24" />
 
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_marginVertical="100dp"
-            android:layout_height="match_parent">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                tools:context=".MainActivity">
+                android:layout_marginVertical="100dp">
 
-                <Button
-                    android:id="@+id/btn_system_bar_dim"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="systemBarDim"
-                    android:textAllCaps="false" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    tools:context=".MainActivity">
 
-                <Button
-                    android:id="@+id/btn_hide_status_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btn_hide_status_bar"
-                    android:textAllCaps="false" />
+                    <Button
+                        android:id="@+id/btn_system_bar_dim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="systemBarDim"
+                        android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/btn_full_screen_immersive"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="fullScreenImmersive"
-                    android:textAllCaps="false" />
+                    <Button
+                        android:id="@+id/btn_hide_status_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_hide_status_bar"
+                        android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/btn_full_screen_sticky_immersive"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="fullScreenStickyImmersive"
-                    android:textAllCaps="false" />
+                    <Button
+                        android:id="@+id/btn_full_screen_immersive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="fullScreenImmersive"
+                        android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/btn_display_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="displayCustomBefore28"
-                    android:textAllCaps="false" />
+                    <Button
+                        android:id="@+id/btn_full_screen_sticky_immersive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="fullScreenStickyImmersive"
+                        android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/btn_display_custom_29"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="displayCustomAfter29"
-                    android:textAllCaps="false" />
+                    <Button
+                        android:id="@+id/btn_display_custom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="displayCustomBefore28"
+                        android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/btn_sys_bar_cover"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SysBarCover"
-                    android:textAllCaps="false" />
+                    <Button
+                        android:id="@+id/btn_display_custom_29"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="displayCustomAfter29"
+                        android:textAllCaps="false" />
 
-
-                <Button
-                    android:id="@+id/btn_status_bar_cover"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btn_status_bar_cover"
-                    android:textAllCaps="false" />
-
-                <Button
-                    android:id="@+id/btn_status_bar_light_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btn_status_bar_light_model"
-                    android:textAllCaps="false" />
-
-                <Button
-                    android:id="@+id/btn_status_bar_dark_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="btn_status_bar_dark_model"
-                    android:textAllCaps="false" />
-
-                <Button
-                    android:id="@+id/btn_clear_window_flag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="clearWindowFlag"
-                    android:textAllCaps="false" />
-
-                <Button
-                    android:id="@+id/btn_clear_view_flag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="clearViewFlag"
-                    android:textAllCaps="false" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </ScrollView>
+                    <Button
+                        android:id="@+id/btn_sys_bar_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SysBarCover"
+                        android:textAllCaps="false" />
 
 
-    </FrameLayout>
+                    <Button
+                        android:id="@+id/btn_status_bar_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_status_bar_cover"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/btn_status_bar_light_model"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_status_bar_light_model"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/btn_status_bar_dark_model"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="btn_status_bar_dark_model"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/btn_clear_window_flag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="clearWindowFlag"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/btn_clear_view_flag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="clearViewFlag"
+                        android:textAllCaps="false" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </ScrollView>
+
+
+        </FrameLayout>
+
+        <io.github.tomgarden.lib_system_bar.view.PlaceHolderNavigationBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black" />
+
+    </LinearLayout>
+
 
 </layout>
