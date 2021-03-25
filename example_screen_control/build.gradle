@@ -47,8 +47,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //implementation project(':lib_system_bar')
-    implementation 'io.github.tomgarden:lib_system_bar:0.0.3'
+    implementation project(':lib_system_bar')
+    //implementation 'io.github.tomgarden:lib_system_bar:0.0.4'
     implementation 'io.github.tomgarden:lib_log:0.1.13'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 }

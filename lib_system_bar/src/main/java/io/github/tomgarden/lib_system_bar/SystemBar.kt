@@ -217,11 +217,23 @@ object SystemBar {
         }
     }
 
+    /** 获取 NavigationBar 高度*/
     fun getNavigationBarHeightPix(context: Context): Int? {
         val resources: Resources = context.resources
         val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
         return if (resourceId > 0) {
             resources.getDimensionPixelSize(resourceId)
+        } else {
+            null
+        }
+    }
+
+    /* 『模拟器可用 , 兼容性差』 当前系统是否展示 NavigationBar */
+    fun configIsShowNavigationBar(context: Context): Boolean? {
+        val id = context.resources
+            .getIdentifier("config_showNavigationBar", "bool", "android")
+        return if (id > 0) {
+            return context.resources.getBoolean(id);
         } else {
             null
         }
