@@ -1,4 +1,26 @@
 
+## usate
+```
+//ModuleName/build.gradle
+dependencies {
+    implementation 'io.github.tomgarden:lib_system_bar:+'
+}
+
+//ModuleName/build.gradle   OR    ProjectName/build.gradle
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/TomGarden/")
+
+        credentials {
+            //不限的 github 账户名
+            username = System.getenv("TOMGARADEN_USERNAME")
+            //与 github 账户名成对的 具有 read:packages 权限的 token
+            password = System.getenv("TOMGARADEN_READ_PACKAGES_TOKEN")
+        }
+    }
+}
+```
+
 ## 0x00. [控制系统界面可见度](https://developer.android.com/training/system-ui?hl=zh-cn)
 
 1. 控制状态栏模糊程度

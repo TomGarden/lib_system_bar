@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Build
 import android.view.*
+import io.github.tomgarden.lib.log.Logger
 import io.github.tomgarden.lib_system_bar.AdjustVisibleFrameListener
 
 
@@ -54,13 +55,15 @@ object SystemBar {
             activity?.window?.let { window ->
                 window.decorView.systemUiVisibility =
                     View.SYSTEM_UI_FLAG_FULLSCREEN or
-                        View.SYSTEM_UI_FLAG_FULLSCREEN or
-                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            View.SYSTEM_UI_FLAG_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             }
         } else {
             activity?.window?.insetsController?.let { controller: WindowInsetsController ->
-                controller.hide(WindowInsets.Type.statusBars() or
-                    WindowInsets.Type.navigationBars())
+                controller.hide(
+                    WindowInsets.Type.statusBars() or
+                            WindowInsets.Type.navigationBars()
+                )
                 controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_TOUCH
 
             }
@@ -185,7 +188,8 @@ object SystemBar {
 
     /** 参考调试代码 : https://stackoverflow.com/a/19494006/7707781 , 如有必要 , 根据逻辑做出相关调整*/
     fun adjustVisibleFrame(activity: Activity?) {
-        activity?.window?.decorView?.viewTreeObserver?.addOnGlobalLayoutListener { AdjustVisibleFrameListener(activity) }
+        activity?.window?.decorView?.viewTreeObserver
+            ?.addOnGlobalLayoutListener(AdjustVisibleFrameListener(activity))
     }
 
     //******************************************************************************************
@@ -204,7 +208,8 @@ object SystemBar {
 
     /**获取 StatusBar 像素 高度*/
     fun getStatusBarHeightPix(context: Context): Int? {
-        val resourceId: Int = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        val resourceId: Int =
+            context.resources.getIdentifier("status_bar_height", "dimen", "android")
         return if (resourceId > 0) {
             context.resources.getDimensionPixelSize(resourceId)
         } else {
@@ -256,7 +261,10 @@ object SystemBar {
     /**『apiLevel >= 28 生效』 在竖屏模式和横屏模式下，内容都会呈现到刘海区域中。*/
     fun supportBangsVerHor(window: Window?) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-            supportBangs(window, WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES)
+            supportBangs(
+                window,
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            )
         }
     }
 

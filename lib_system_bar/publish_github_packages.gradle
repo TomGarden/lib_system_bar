@@ -7,8 +7,8 @@ Github Actions 工作流暂未完成
 * */
 
 ext {
-    moduleVersionCode = 1
-    moduleVersionName = '0.0.1'
+    moduleVersionCode = 2
+    moduleVersionName = '0.0.2'
     moduleName = 'lib_system_bar'
 
     mavenGroupId = 'io.github.tomgarden'
@@ -49,7 +49,7 @@ publishing {
         //上传到 Github Packages
         maven {
             name = moduleName
-            url = uri("https://maven.pkg.github.com/TomGarden/lib_system_bar")
+            url = uri("https://maven.pkg.github.com/TomGarden/$moduleName")
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("TOMGARADEN_USERNAME")
                 password = project.findProperty("gpr.key") ?: System.getenv("TOMGARADEN_WRITE_PACKAGES_TOKEN")
@@ -69,7 +69,7 @@ task testTask {
     //测试 gradle 语法
     println(System.getenv("TOMGARADEN_USERNAME"))
     println(System.getenv("TOMGARADEN_WRITE_PACKAGES_TOKEN"))
-    println("$buildDir/outputs/aar/LibLog-release.aar")
+    println("$buildDir/outputs/aar/$moduleName-release.aar")
 }
 
 //在 project 执行命令, 即可完成上传
