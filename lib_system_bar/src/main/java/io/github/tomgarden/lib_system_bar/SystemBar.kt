@@ -27,73 +27,42 @@ object SystemBar {
         activity?.recreate()
     }
 
-    /** [调暗系统栏](https://developer.android.com/training/system-ui/dim#kotlin)
-     * @}
+    /** [调暗系统栏(状态栏/导航栏)](https://developer.android.com/training/system-ui/dim#kotlin)
+     *
+     * 本课介绍如何在 Android 4.0（API 级别 14）及更高版本中调暗系统栏（即状态和导航栏）。在更早期的版本中，Android 不提供调暗系统栏的内置方式。
+     * 使用此方法时，内容大小不会调整，但系统栏中的图标会消失。用户只要轻触屏幕的状态栏或导航栏区域，这两个栏就会全面显示出来。这种方法的优点在于，这些栏仍然存在，但是它们的详细信息被遮盖，不仅可以在打造沉浸式体验，而且不影响用户轻松访问这些栏。
+     *
      *  已知:
-     *  1. api 19/29 调用生效
-     *  2. api 21 调用无效
+     *  1. api 调用生效 : 16  31
+     *  2. api 调用无效 : 19  21  29
+     *  3. 未出现的版本系为测试
      * */
     fun systemBarDim(activity: Activity?) {
         activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE
     }
 
+    /**
+     * [隐藏状态栏](https://developer.android.com/training/system-ui/status?hl=zh-cn)
+     *
+     * 对于 4.0(14) 及更低版本
+     *     <application
+     *          ...
+     *          android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+     *          ...
+     *     </application>
+     *
+     * @param activity
+     */
     fun hideStatusBar(activity: Activity?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            /*此种隐藏方式触摸不会导致状态来显现*/
             activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         } else {
+            /*此种隐藏方式触摸会导致状态来显现*/
             activity?.window?.insetsController?.let { controller: WindowInsetsController ->
                 controller.hide(WindowInsets.Type.statusBars())
             }
         }
-    }
-
-    /**[使用沉浸式全屏模式](https://developer.android.com/training/system-ui/immersive)
-     * 当用户需要调出系统栏时，他们可从隐藏系统栏的任一边滑动, 来调出系统界面
-     * */
-    fun fullScreenImmersive(activity: Activity?) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-            activity?.window?.let { window ->
-                window.decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_FULLSCREEN or
-                            View.SYSTEM_UI_FLAG_FULLSCREEN or
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            }
-        } else {
-            activity?.window?.insetsController?.let { controller: WindowInsetsController ->
-                controller.hide(
-                    WindowInsets.Type.statusBars() or
-                            WindowInsets.Type.navigationBars()
-                )
-                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_TOUCH
-
-            }
-        }
-    }
-
-    /**[使用粘性沉浸式全屏模式](https://developer.android.com/training/system-ui/immersive)
-     *
-     * 在粘性沉浸模式下，如果用户从隐藏了系统栏的边缘滑动，系统栏会显示出来，
-     * 但它们是半透明的，并且轻触手势会传递给应用，因此应用也会响应该手势。
-     *
-     * 无互动几秒钟后，或者用户在系统栏之外的任何位置轻触或做手势时，系统栏会自动消失。
-     * */
-    fun fullScreenStickyImmersive(activity: Activity?) {
-
-        var flag =
-            /* 没有刘海屏的设备上没有这一行也是同样的效果 , 刘海屏设备兼容需要它存在 */
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                /*{@link WindowInsetsController#hide(int)} with {@link (WindowInsets.Type)#statusBars()}*/
-                .or(View.SYSTEM_UI_FLAG_FULLSCREEN)
-                /*{@link WindowInsetsController#hide(int)} with {@link Type#navigationBars()}*/
-                .or(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-
-        /*『apiLevel >= 19 生效』粘性效果*/
-        /*{@link WindowInsetsController#BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE}*/
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            flag = flag.or(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-        }
-
-        activity?.window?.decorView?.systemUiVisibility = flag
     }
 
     /** 『Api level >= 19 生效』展示 statusBar 和 navigationBar 但是会覆盖在应用布局之上
@@ -151,6 +120,56 @@ object SystemBar {
         }
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
+
+    /**[使用沉浸式全屏模式](https://developer.android.com/training/system-ui/immersive)
+     * 当用户需要调出系统栏时，他们可从隐藏系统栏的任一边滑动, 来调出系统界面
+     * */
+    fun fullScreenImmersive(activity: Activity?) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            activity?.window?.let { window ->
+                window.decorView.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            }
+        } else {
+            activity?.window?.insetsController?.let { controller: WindowInsetsController ->
+                controller.hide(
+                    WindowInsets.Type.statusBars() or
+                            WindowInsets.Type.navigationBars()
+                )
+                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_TOUCH
+
+            }
+        }
+    }
+
+    /**[使用粘性沉浸式全屏模式](https://developer.android.com/training/system-ui/immersive)
+     *
+     * 在粘性沉浸模式下，如果用户从隐藏了系统栏的边缘滑动，系统栏会显示出来，
+     * 但它们是半透明的，并且轻触手势会传递给应用，因此应用也会响应该手势。
+     *
+     * 无互动几秒钟后，或者用户在系统栏之外的任何位置轻触或做手势时，系统栏会自动消失。
+     * */
+    fun fullScreenStickyImmersive(activity: Activity?) {
+
+        var flag =
+            /* 没有刘海屏的设备上没有这一行也是同样的效果 , 刘海屏设备兼容需要它存在 */
+            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                /*{@link WindowInsetsController#hide(int)} with {@link (WindowInsets.Type)#statusBars()}*/
+                .or(View.SYSTEM_UI_FLAG_FULLSCREEN)
+                /*{@link WindowInsetsController#hide(int)} with {@link Type#navigationBars()}*/
+                .or(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+
+        /*『apiLevel >= 19 生效』粘性效果*/
+        /*{@link WindowInsetsController#BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE}*/
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            flag = flag.or(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        }
+
+        activity?.window?.decorView?.systemUiVisibility = flag
+    }
+
 
     /** 『Api level >= 23 生效』 设置 statusBar 为亮色主题的时候 statusBar 中文字颜色为暗色*/
     fun statusBarLightModel(activity: Activity?): Unit {

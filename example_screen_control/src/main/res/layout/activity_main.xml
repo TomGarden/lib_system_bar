@@ -13,10 +13,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <io.github.tomgarden.lib_system_bar.view.PlaceHolderStatusBar
+        <!--<io.github.tomgarden.lib_system_bar.view.PlaceHolderStatusBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black" />
+            android:background="@color/black" />-->
 
         <FrameLayout
             android:layout_width="match_parent"

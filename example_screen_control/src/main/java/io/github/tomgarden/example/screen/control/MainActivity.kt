@@ -13,7 +13,11 @@ class MainActivity : Activity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //SystemBar.systemBarCoverLayout(this@MainActivity)
+        SystemBar.systemBarCoverLayout(this@MainActivity)
+        SystemBar.setStatusBarColor(this@MainActivity, Color.TRANSPARENT)
+        SystemBar.setNavigationBarColor(this@MainActivity, Color.TRANSPARENT)
+        //SystemBar.setRootView(this@MainActivity)
+        SystemBar.adjustVisibleFrame(this@MainActivity)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
